@@ -41,7 +41,7 @@
         android:layout_width="74dp"
         android:layout_height="87dp"
         android:text="TextView"
-        android:textColor="#E91E63"
+        android:textColor="#FF9800"
         android:textSize="60sp"
         app:layout_anchor="@+id/destText"
         app:layout_anchorGravity="end|center" />
