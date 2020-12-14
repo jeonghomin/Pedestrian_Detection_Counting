@@ -22,6 +22,8 @@ import android.util.Size;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Surface;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,6 +68,15 @@ public abstract class MainActivity extends AppCompatActivity
         /*Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);*/
 
+        ImageButton exitbtn = (ImageButton) findViewById(R.id.toExit);
+        exitbtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                finish();
+                System.exit(0);
+            }
+        });
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         if (hasPermission()) {
@@ -73,9 +84,7 @@ public abstract class MainActivity extends AppCompatActivity
         } else {
             requestPermission();
         }
-        frameValueTextView = findViewById(R.id.frame_info);
-        cropValueTextView = findViewById(R.id.crop_info);
-        inferenceTimeTextView = findViewById(R.id.inference_info);
+
     }
 
     @Override

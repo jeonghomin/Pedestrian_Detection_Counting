@@ -30,8 +30,10 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
+import android.widget.TextView;
 import android.widget.Toast;
-
+import android.os.Vibrator;
+import android.content.Context;
 import com.toure.objectdetection.customview.OverlayView;
 import com.toure.objectdetection.env.BorderedText;
 import com.toure.objectdetection.env.ImageUtils;
@@ -234,19 +236,21 @@ public class DetectorActivity extends MainActivity implements OnImageAvailableLi
                 }
               }
               System.out.println("Count = "+ i);
+              String count = Integer.toString(i);
 
 
+              TextView tv = (TextView) findViewById(R.id.destText);//목적지 글자 출력
+              tv.setText(count);
+              //5명이상이면 진동울림
+              if(i>=5){
+                Vibrator vibrator=(Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+                vibrator.vibrate(500);
+              }
               tracker.trackResults(mappedRecognitions, luminanceCopy, currTimestamp);
               trackingOverlay.postInvalidate();
 
               computingDetection = false;
 
-              runOnUiThread(
-                      () -> {
-                        showFrameInfo(previewWidth + "x" + previewHeight);
-                        showCropInfo(cropCopyBitmap.getWidth() + "x" + cropCopyBitmap.getHeight());
-                        showInference(lastProcessingTimeMs + "ms");
-                      });
             }catch (Exception ex){
               ex.printStackTrace();
             }
